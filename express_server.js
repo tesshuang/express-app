@@ -54,6 +54,11 @@ app.post("/urls/:shortURL/delete", (req, res) => {
   res.redirect(`/urls`);
 });
 
+app.post("/urls/:id", (req, res) => {
+  urlDatabase[req.params.id] = req.body.longURL;
+  res.redirect(`/urls`);
+});
+
 app.get("/hello", (req, res) => {
   const templateVars = { greeting: "Hello World!" };
   res.render("pages/hello_world", templateVars);
