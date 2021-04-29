@@ -83,6 +83,11 @@ app.post("/logout", (req, res) => {
   res.redirect(`/urls`);
 });
 
+app.get("/register", (req, res) => {
+  const templateVars = { greeting: "Hello World!" };
+  res.render("pages/register", templateVars);
+});
+
 app.get("/hello", (req, res) => {
   const templateVars = { greeting: "Hello World!" };
   res.render("pages/hello_world", templateVars);
