@@ -115,6 +115,15 @@ app.post("/logout", (req, res) => {
   res.redirect(`/urls`);
 });
 
+app.get("/login", (req, res) => {
+  res.render("pages/login");
+});
+
+app.post("/login", (req, res) => {
+  // res.clearCookie('user_id');
+  res.redirect(`/urls`);
+});
+
 app.get("/hello", (req, res) => {
   const templateVars = { greeting: "Hello World!" };
   res.render("pages/hello_world", templateVars);
