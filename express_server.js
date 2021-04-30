@@ -116,12 +116,24 @@ app.post("/logout", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
+  console.log(users);
   res.render("pages/login");
 });
 
 app.post("/login", (req, res) => {
-  // res.clearCookie('user_id');
-  res.redirect(`/urls`);
+  const usrEmail = req.body.email;
+  const usrPwd = req.body.password;
+  console.log(usrEmail, usrPwd);
+  
+  for (const usr in users) {
+    if (usrEmail === users[usr].email && usrPwd === users[usr].password) {
+      res.cookie('user_id', users[usr].id);
+      res.redirect(`/urls`);
+    } else {
+      res.sendStatus(400);
+    }
+  }
+  
 });
 
 app.get("/hello", (req, res) => {
