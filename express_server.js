@@ -93,16 +93,21 @@ app.get("/register", (req, res) => {
 
 app.post("/register", (req, res) => {
   const newUserKey = generateRandomString();
-  const user = {
-    [newUserKey]: {
-      id: newUserKey,
-      email: req.body.email,
-      password: req.body.password
+  if (req.body.email === '' || req.body.password === '') {
+    res.sendStatus(400);
+  } else {
+    const user = {
+      [newUserKey]: {
+        id: newUserKey,
+        email: req.body.email,
+        password: req.body.password
+      }
     }
+    Object.assign(users, user);
+    res.cookie('user_id', newUserKey);
+    res.redirect(`/urls`);
   }
-  Object.assign(users, user);
-  res.cookie('user_id', newUserKey);
-  res.redirect(`/urls`);
+  
 });
 
 app.post("/logout", (req, res) => {
