@@ -123,15 +123,18 @@ app.get("/login", (req, res) => {
 app.post("/login", (req, res) => {
   const usrEmail = req.body.email;
   const usrPwd = req.body.password;
-  console.log(usrEmail, usrPwd);
-  
+  let matched = false;
+
   for (const usr in users) {
     if (usrEmail === users[usr].email && usrPwd === users[usr].password) {
+      matched = true;
       res.cookie('user_id', users[usr].id);
-      res.redirect(`/urls`);
-    } else {
-      res.sendStatus(400);
-    }
+    } 
+  }
+  if (matched) {
+    res.redirect(`/urls`);
+  } else {
+    res.sendStatus(400);
   }
   
 });
