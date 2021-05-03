@@ -93,6 +93,8 @@ app.post("/register", (req, res) => {
   const newUserKey = generateRandomString();
   if (req.body.email === '' || req.body.password === '') {
     res.sendStatus(400);
+  } else if (getUserByEmail(req.body.email, users)) {
+    res.sendStatus(400);
   } else {
     const user = {
       [newUserKey]: {
