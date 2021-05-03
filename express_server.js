@@ -2,6 +2,7 @@ const express = require("express");
 const cookieParser = require('cookie-parser');
 const app = express();
 const PORT = 8080; // default port 8080
+const { getUserByEmail } = require('./helpers.js');
 
 app.use(cookieParser());
 
@@ -33,15 +34,9 @@ function generateRandomString() {
   return Math.random().toString(36).slice(-6);
 }
 
-const getUserByEmail = function(email, database) {
-  for ( const user in database) {
-    if (email === database[user].email) {
-      return user;
-    }
-  }
-};
-
 app.get("/", (req, res) => {
+  console.log(getUserByEmail('user@example.com', users));
+  console.log(getUserByEmail('asd@asd.com', users));
   res.send("Hello!");
 });
 
