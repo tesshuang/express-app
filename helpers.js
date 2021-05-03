@@ -6,6 +6,11 @@ const getUserByEmail = function(email, database) {
   }
 };
 
+function generateRandomString() {
+  return Math.random().toString(36).slice(-6);
+}
+
 module.exports = {
-  getUserByEmail
+  getUserByEmail,
+  generateRandomString
 }
